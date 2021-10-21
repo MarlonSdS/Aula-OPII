@@ -31,6 +31,17 @@ public class PersonService {
 		var entity = repository.save(person);
 		return entity;
 	}
+	
+	public Person update(Person person) {
+		var entity = repository.findById(person.getId()).orelse(null);
+		entity.setFirstName(person.getFirstName());
+		entity.setLastName(person.getLastName());
+		entity.setGender(person.getGender());
+		entity.setAddress(person.getAdress());
+		
+		return repository.save(entity);
+	}
+
 
 	public void delete(Long id) {
 		var entity = repository.findById(id).orElse(null);
